@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		599082BE27B6391C00FF979F /* TrackTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599082BD27B6391C00FF979F /* TrackTableViewController.swift */; };
+		599082C027B63A6600FF979F /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599082BF27B63A6600FF979F /* PageViewController.swift */; };
 		59B9192E27B636BE0064B9F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B9192D27B636BE0064B9F2 /* AppDelegate.swift */; };
 		59B9193027B636BE0064B9F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B9192F27B636BE0064B9F2 /* SceneDelegate.swift */; };
 		59B9193227B636BE0064B9F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B9193127B636BE0064B9F2 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		599082BD27B6391C00FF979F /* TrackTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewController.swift; sourceTree = "<group>"; };
+		599082BF27B63A6600FF979F /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		59B9192A27B636BE0064B9F2 /* PageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59B9192D27B636BE0064B9F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59B9192F27B636BE0064B9F2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				59B9192D27B636BE0064B9F2 /* AppDelegate.swift */,
 				59B9192F27B636BE0064B9F2 /* SceneDelegate.swift */,
 				59B9193127B636BE0064B9F2 /* ViewController.swift */,
+				599082BD27B6391C00FF979F /* TrackTableViewController.swift */,
+				599082BF27B63A6600FF979F /* PageViewController.swift */,
 				59B9193327B636BE0064B9F2 /* Main.storyboard */,
 				59B9193627B636C00064B9F2 /* Assets.xcassets */,
 				59B9193827B636C00064B9F2 /* LaunchScreen.storyboard */,
@@ -139,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				59B9193227B636BE0064B9F2 /* ViewController.swift in Sources */,
+				599082C027B63A6600FF979F /* PageViewController.swift in Sources */,
+				599082BE27B6391C00FF979F /* TrackTableViewController.swift in Sources */,
 				59B9192E27B636BE0064B9F2 /* AppDelegate.swift in Sources */,
 				59B9193027B636BE0064B9F2 /* SceneDelegate.swift in Sources */,
 			);
