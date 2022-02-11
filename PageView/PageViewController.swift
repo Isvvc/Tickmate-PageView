@@ -7,8 +7,9 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController {
+class PageViewController: UIPageViewController, TrackTableViewDelegate {
     
+    var scrollPosition: CGPoint = .zero
     private var page: Int = 0
 
     override func viewDidLoad() {
@@ -25,6 +26,7 @@ class PageViewController: UIPageViewController {
         guard let trackVC = storyboard?.instantiateViewController(withIdentifier: "TrackTable") as? TrackTableViewController else { return nil }
         
         trackVC.index = index
+        trackVC.delegate = self
         
         return trackVC
     }
