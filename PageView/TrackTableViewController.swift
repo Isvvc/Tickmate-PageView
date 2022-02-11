@@ -42,23 +42,20 @@ class TrackTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        101
+        100
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         "Page \(index)"
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        44
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-
-        if indexPath.row == 0 {
-            cell.textLabel?.text = "Page \(index)"
-            cell.textLabel?.font = .boldSystemFont(ofSize: 17)
-        } else {
-            cell.textLabel?.text = "Page \(index)\t\tRow \(indexPath.row)"
-            cell.textLabel?.font = .systemFont(ofSize: 17)
-        }
+        cell.textLabel?.text = "Page \(index + 1)\t\tRow \(indexPath.row)"
 
         scrollToDelegate()
         return cell
