@@ -39,17 +39,6 @@ class PageViewController: UIPageViewController, TrackTableViewDelegate {
 
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        /*
-        let index: Int
-        if let previousTrackVC = viewController as? TrackTableViewController {
-            index = previousTrackVC.index - 1
-        } else {
-            // The above should be more reliable, but use this as a fallback
-            index = page - 1
-        }
-
-        return trackVC(for: index)
-         */
         trackVC(for: (index(of: viewController) ?? page) - 1)
     }
     

@@ -29,7 +29,7 @@ class TrackTableViewController: UITableViewController {
     }
     
     private func scrollToDelegate() {
-        guard !tableView.isDragging,
+        guard !tableView.isDragging, !tableView.isDecelerating,
               let scrollPosition = delegate?.scrollPosition else { return }
         print(scrollPosition)
         self.tableView.contentOffset = scrollPosition
@@ -38,11 +38,15 @@ class TrackTableViewController: UITableViewController {
     // MARK: - Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 101
+        101
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Page \(index)"
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
