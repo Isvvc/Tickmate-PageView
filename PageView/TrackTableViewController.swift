@@ -35,7 +35,7 @@ class TrackTableViewController: UITableViewController {
         self.tableView.contentOffset = scrollPosition
     }
 
-    // MARK: - Table View Data Source
+    //MARK: Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -60,6 +60,8 @@ class TrackTableViewController: UITableViewController {
         scrollToDelegate()
         return cell
     }
+    
+    //MARK: Scroll View Delegate
     
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         delegate?.scrollPosition = scrollView.contentOffset
