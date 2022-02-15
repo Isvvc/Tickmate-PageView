@@ -2,19 +2,39 @@
 //  ViewController.swift
 //  PageView
 //
-//  Created by Isaac Lyons on 2/10/22.
+//  Created by Elaine Lyons on 2/10/22.
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shadowView: UIView!
+    
+    var scrollController: ScrollController = .shared
+    private var scrollSubscriber: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        tableView.layer.opacity = 0.5
+        
+        // Set up shadow
+        shadowView.layer.shadowRadius = 4
+        shadowView.layer.shadowOpacity = 0.5
+        shadowView.clipsToBounds = false
+        
+        // Keep shadow on the right
+        let maskLayer = CALayer()
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.frame = CGRect(x: 0, y: 0, width: tableView.frame.width * 2, height: tableView.frame.height * 2)
+        
+        shadowView.layer.mask = maskLayer
+        
+        // Sync scroll position
+        scrollSubscriber = scrollController.$contentOffset.sink { [weak self] contentOffset in
+            self?.tableView.contentOffset = contentOffset
+        }
     }
 
 }

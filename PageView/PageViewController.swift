@@ -2,7 +2,7 @@
 //  PageViewController.swift
 //  PageView
 //
-//  Created by Isaac Lyons on 2/10/22.
+//  Created by Elaine Lyons on 2/10/22.
 //
 
 import UIKit

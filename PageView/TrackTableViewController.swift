@@ -2,7 +2,7 @@
 //  TrackTableViewController.swift
 //  PageView
 //
-//  Created by Isaac Lyons on 2/10/22.
+//  Created by Elaine Lyons on 2/10/22.
 //
 
 import UIKit
@@ -15,6 +15,7 @@ class TrackTableViewController: UITableViewController {
     
     var index = 0
     weak var delegate: TrackTableViewDelegate?
+    var scrollController: ScrollController = .shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,12 @@ class TrackTableViewController: UITableViewController {
 
         scrollToDelegate()
         return cell
+    }
+    
+    //MARK: Scroll View Delegate
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollController.contentOffset = scrollView.contentOffset
     }
     
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
