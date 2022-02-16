@@ -14,14 +14,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var shadowView: UIView!
     
     var scrollController: ScrollController = .shared
-    private var scrollSubscriber: AnyCancellable?
+    private var subscribers = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set up shadow
         shadowView.layer.shadowRadius = 4
-        shadowView.layer.shadowOpacity = 0.5
+        //shadowView.layer.shadowOpacity = 0.5
         shadowView.clipsToBounds = false
         
         // Keep shadow on the right
@@ -32,9 +32,17 @@ class ViewController: UIViewController {
         shadowView.layer.mask = maskLayer
         
         // Sync scroll position
-        scrollSubscriber = scrollController.$contentOffset.sink { [weak self] contentOffset in
+        let scrollSubscriber = scrollController.$contentOffset.sink { [weak self] contentOffset in
             self?.tableView.contentOffset = contentOffset
         }
+        
+        let pagingSubscriber = scrollController.$isPaging.sink { [weak self] isPaging in
+            UIView.animate(withDuration: 0.25) {
+                self?.shadowView.layer.shadowOpacity = isPaging ? 0.5 : 0
+            }
+        }
+        
+        subscribers = [scrollSubscriber, pagingSubscriber]
     }
 
 }
