@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PageViewController: UIPageViewController, TrackTableViewDelegate {
+class PageViewController: UIPageViewController {
     
     var scrollPosition: CGPoint = .zero
     var scrollController: ScrollController = .shared
@@ -38,7 +38,6 @@ class PageViewController: UIPageViewController, TrackTableViewDelegate {
         guard let trackVC = storyboard?.instantiateViewController(withIdentifier: "TrackTable") as? TrackTableViewController else { return nil }
         
         trackVC.index = index
-        trackVC.delegate = self
         
         return trackVC
     }
@@ -69,6 +68,8 @@ extension PageViewController: UIPageViewControllerDelegate {
         page = trackVC.index
     }
 }
+
+//MARK: Scroll View Delegate
 
 extension PageViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

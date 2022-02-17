@@ -7,14 +7,9 @@
 
 import UIKit
 
-protocol TrackTableViewDelegate: AnyObject {
-    var scrollPosition: CGPoint { get set }
-}
-
 class TrackTableViewController: UITableViewController {
     
     var index = 0
-    weak var delegate: TrackTableViewDelegate?
     var scrollController: ScrollController = .shared
 
     override func viewDidLoad() {
@@ -30,9 +25,9 @@ class TrackTableViewController: UITableViewController {
     }
     
     private func scrollToDelegate() {
-        guard !tableView.isDragging, !tableView.isDecelerating,
-              let scrollPosition = delegate?.scrollPosition else { return }
-        print(scrollPosition)
+        guard !tableView.isDragging, !tableView.isDecelerating else { return }
+        let scrollPosition = scrollController.contentOffset
+        print(scrollPosition, "scrollToDelegate")
         self.tableView.contentOffset = scrollPosition
     }
 
@@ -65,22 +60,28 @@ class TrackTableViewController: UITableViewController {
     //MARK: Scroll View Delegate
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // This function gets called on view load with a value of zero,
+        // resetting the scroll position every time a new screen loads.
+        // This guard prevents that. The end functions below allow it
+        // to still sync position when it is 0.
+        guard scrollView.contentOffset != .zero else { return }
         scrollController.contentOffset = scrollView.contentOffset
+        print(scrollView.contentOffset, "scrollViewDidScroll")
     }
     
     override func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        delegate?.scrollPosition = scrollView.contentOffset
-        print(scrollView.contentOffset)
+        scrollController.contentOffset = scrollView.contentOffset
+        print(scrollView.contentOffset, "scrollViewDidEndScrollingAnimation")
     }
-    
+
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        delegate?.scrollPosition = scrollView.contentOffset
-        print(scrollView.contentOffset)
+        scrollController.contentOffset = scrollView.contentOffset
+        print(scrollView.contentOffset, "scrollViewDidEndDecelerating")
     }
-    
+
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        delegate?.scrollPosition = scrollView.contentOffset
-        print(scrollView.contentOffset)
+        scrollController.contentOffset = scrollView.contentOffset
+        print(scrollView.contentOffset, "scrollViewDidEndDragging")
     }
 
 }
