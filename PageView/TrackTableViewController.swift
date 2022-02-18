@@ -41,7 +41,7 @@ class TrackTableViewController: UITableViewController {
         self.tableView.contentOffset = scrollPosition
     }
 
-    // MARK: - Table View Data Source
+    // MARK: Table View Data Source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         1
@@ -54,17 +54,26 @@ class TrackTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         "Page \(index)"
     }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+//        cell.textLabel?.text = "Page \(index + 1)\t\tRow \(indexPath.row)"
+        if let dayRow = cell as? DayTableViewCell {
+            dayRow.configure(with: "Page \(index + 1)\t\tRow \(indexPath.row)")
+        }
+
+        scrollToDelegate()
+        return cell
+    }
+    
+    //MARK: Table View Delegate
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         44
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-        cell.textLabel?.text = "Page \(index + 1)\t\tRow \(indexPath.row)"
-
-        scrollToDelegate()
-        return cell
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        44
     }
     
     //MARK: Scroll View Delegate

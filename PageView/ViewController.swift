@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: nil, action: nil)
+        
         // Set up shadow
         shadowView.layer.shadowRadius = 4
         //shadowView.layer.shadowOpacity = 0.5
