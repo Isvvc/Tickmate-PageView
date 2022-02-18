@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     
     var scrollController: ScrollController = .shared
     private var subscribers = Set<AnyCancellable>()
+    private var drop: DispatchWorkItem?
+    private var impact: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +39,35 @@ class ViewController: UIViewController {
         }
         
         let pagingSubscriber = scrollController.$isPaging.sink { [weak self] isPaging in
-            UIView.animate(withDuration: 0.25) {
-                self?.shadowView.layer.shadowOpacity = isPaging ? 0.5 : 0
+            guard let self = self else { return }
+            if isPaging {
+                self.drop?.cancel()
+                self.impact?.cancel()
+                UIView.animate(withDuration: 0.25) {
+                    self.shadowView.layer.shadowOpacity = 0.5
+                }
+            } else {
+                self.endPaging()
             }
         }
         
         subscribers = [scrollSubscriber, pagingSubscriber]
+    }
+    
+    private func endPaging() {
+        let drop = DispatchWorkItem { [weak self] in
+            UIView.animate(withDuration: 0.25) {
+                self?.shadowView.layer.shadowOpacity = 0
+            }
+        }
+        self.drop = drop
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.125, execute: drop)
+        
+        let impact = DispatchWorkItem {
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+        }
+        self.impact = impact
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: impact)
     }
 
 }
