@@ -23,7 +23,7 @@ class DayTableViewCell: UITableViewCell {
         })
         button.setTitle("Button", for: .normal)
         button.backgroundColor = UIColor.systemOrange
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 4
         button.tintColor = .white
         
         stackView.addArrangedSubview(button)
@@ -33,8 +33,13 @@ class DayTableViewCell: UITableViewCell {
             print("lol")
         })
         tempButton.backgroundColor = UIColor.systemBlue
-        tempButton.layer.cornerRadius = 8
+        tempButton.layer.cornerRadius = 4
         stackView.addArrangedSubview(tempButton)
+        
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -12),
+            tempButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -12)
+        ])
     }
 
     func configure(with title: String) {
