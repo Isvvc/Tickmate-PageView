@@ -6,17 +6,27 @@
 //
 
 import UIKit
+import Combine
 
 class TrackTableViewController: UITableViewController {
     
     var index = 0
     var scrollController: ScrollController = .shared
+    
+    private var pagingSubscriber: AnyCancellable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         scrollToDelegate()
+        
+        pagingSubscriber = scrollController.$isPaging.sink { [weak self] isPaging in
+            self?.tableView.showsVerticalScrollIndicator = !isPaging
+            if !isPaging {
+                self?.tableView.flashScrollIndicators()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
