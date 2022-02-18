@@ -19,6 +19,7 @@ class TrackTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.delegate = self
+        tableView.sectionHeaderTopPadding = 0
         scrollToDelegate()
         
         pagingSubscriber = scrollController.$isPaging.sink { [weak self] isPaging in

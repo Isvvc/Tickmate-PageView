@@ -10,6 +10,7 @@ import Combine
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tableViewContainer: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shadowView: UIView!
     
@@ -28,10 +29,19 @@ class ViewController: UIViewController {
         //shadowView.layer.shadowOpacity = 0.5
         shadowView.clipsToBounds = false
         
+        tableView.sectionHeaderTopPadding = 0
+        
+        // Hide the header when scrolling
+        let maskLayer1 = CALayer()
+        maskLayer1.backgroundColor = UIColor.black.cgColor
+        maskLayer1.frame = CGRect(x: 0, y: 44, width: tableView.frame.width, height: tableView.frame.height)
+        
+        tableViewContainer.layer.mask = maskLayer1
+        
         // Keep shadow on the right
         let maskLayer = CALayer()
         maskLayer.backgroundColor = UIColor.black.cgColor
-        maskLayer.frame = CGRect(x: 0, y: 0, width: tableView.frame.width * 2, height: tableView.frame.height * 2)
+        maskLayer.frame = CGRect(x: 0, y: 44, width: tableView.frame.width * 2, height: tableView.frame.height * 2)
         
         shadowView.layer.mask = maskLayer
         
@@ -84,11 +94,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "Title"
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        44
+        "Page ?"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,4 +104,20 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-extension ViewController: UITableViewDelegate {}
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        44
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.backgroundColor = .red
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.green.cgColor
+//        view.backgroundColor = .clear
+//        view.layer.opacity = 0
+    }
+}

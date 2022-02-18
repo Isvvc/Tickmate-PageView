@@ -26,48 +26,59 @@
                                 <rect key="frame" x="0.0" y="88" width="100" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iAR-QT-TVJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cEp-nA-yVm">
                                 <rect key="frame" x="0.0" y="88" width="100" height="808"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iAR-QT-TVJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="808"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TestCell" id="mbd-ph-KZM">
+                                                <rect key="frame" x="0.0" y="44.5" width="100" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbd-ph-KZM" id="wwo-1V-ldj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="VjO-av-r2k"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="fit-VF-iOt"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="lGO-fQ-srb"/>
+                                    <constraint firstAttribute="width" constant="100" id="0JV-MZ-ory"/>
+                                    <constraint firstItem="iAR-QT-TVJ" firstAttribute="top" secondItem="cEp-nA-yVm" secondAttribute="top" id="BjR-Or-vZ2"/>
+                                    <constraint firstItem="iAR-QT-TVJ" firstAttribute="leading" secondItem="cEp-nA-yVm" secondAttribute="leading" id="DML-aE-Ond"/>
+                                    <constraint firstAttribute="trailing" secondItem="iAR-QT-TVJ" secondAttribute="trailing" id="Zel-43-emM"/>
+                                    <constraint firstAttribute="bottom" secondItem="iAR-QT-TVJ" secondAttribute="bottom" id="hy9-AD-ii5"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TestCell" id="mbd-ph-KZM">
-                                        <rect key="frame" x="0.0" y="44.5" width="100" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbd-ph-KZM" id="wwo-1V-ldj">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="VjO-av-r2k"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="fit-VF-iOt"/>
-                                </connections>
-                            </tableView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="iAR-QT-TVJ" firstAttribute="leading" secondItem="3Vd-2s-JQj" secondAttribute="leading" id="0n5-Tc-NOr"/>
-                            <constraint firstItem="U6n-Jf-edN" firstAttribute="bottom" secondItem="iAR-QT-TVJ" secondAttribute="bottom" id="6dz-ZI-k6Q"/>
-                            <constraint firstItem="U6n-Jf-edN" firstAttribute="leading" secondItem="iAR-QT-TVJ" secondAttribute="leading" id="Cwb-wA-7aW"/>
+                            <constraint firstItem="U6n-Jf-edN" firstAttribute="top" secondItem="cEp-nA-yVm" secondAttribute="top" id="4h2-dE-RSc"/>
+                            <constraint firstItem="U6n-Jf-edN" firstAttribute="bottom" secondItem="cEp-nA-yVm" secondAttribute="bottom" id="EZy-f3-Fgb"/>
                             <constraint firstItem="3Vd-2s-JQj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gg9-1g-oZy"/>
-                            <constraint firstItem="U6n-Jf-edN" firstAttribute="trailing" secondItem="iAR-QT-TVJ" secondAttribute="trailing" id="K5h-74-FmU"/>
+                            <constraint firstItem="U6n-Jf-edN" firstAttribute="leading" secondItem="cEp-nA-yVm" secondAttribute="leading" id="Iv7-rh-nZc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3Vd-2s-JQj" secondAttribute="trailing" id="MdQ-Dq-cjM"/>
                             <constraint firstAttribute="bottom" secondItem="3Vd-2s-JQj" secondAttribute="bottom" id="Mz7-BD-BH0"/>
-                            <constraint firstItem="iAR-QT-TVJ" firstAttribute="bottom" secondItem="3Vd-2s-JQj" secondAttribute="bottom" id="cjk-rU-bLo"/>
+                            <constraint firstItem="cEp-nA-yVm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="SnI-3S-W3y"/>
+                            <constraint firstItem="cEp-nA-yVm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V9w-Vm-rM9"/>
                             <constraint firstItem="3Vd-2s-JQj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eYd-iM-0mG"/>
-                            <constraint firstItem="iAR-QT-TVJ" firstAttribute="top" secondItem="3Vd-2s-JQj" secondAttribute="top" id="i3Z-vY-jnT"/>
-                            <constraint firstItem="U6n-Jf-edN" firstAttribute="top" secondItem="iAR-QT-TVJ" secondAttribute="top" id="rN8-gS-ZdF"/>
+                            <constraint firstAttribute="bottom" secondItem="cEp-nA-yVm" secondAttribute="bottom" id="kjB-QD-6Ok"/>
+                            <constraint firstItem="U6n-Jf-edN" firstAttribute="trailing" secondItem="cEp-nA-yVm" secondAttribute="trailing" id="xaI-Kb-qeh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tickmate" largeTitleDisplayMode="never" id="L58-Bx-Ijc"/>
                     <connections>
                         <outlet property="shadowView" destination="U6n-Jf-edN" id="9hu-ZT-Wo3"/>
                         <outlet property="tableView" destination="iAR-QT-TVJ" id="Tl0-7X-qwT"/>
+                        <outlet property="tableViewContainer" destination="cEp-nA-yVm" id="We5-iO-jcI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
