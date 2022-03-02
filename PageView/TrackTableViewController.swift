@@ -10,6 +10,8 @@ import Combine
 
 class TrackTableViewController: UITableViewController {
     
+    static let days = 100
+    
     var index = 0
     var scrollController: ScrollController = .shared
     
@@ -41,6 +43,12 @@ class TrackTableViewController: UITableViewController {
         print(scrollPosition, "scrollToDelegate")
         self.tableView.contentOffset = scrollPosition
     }
+    
+    private func scrollToBottom() {
+        let indexPath = IndexPath(row: Self.days-1, section: 0)
+//        self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        self.tableView.contentOffset = .init(x: 0, y: self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom)
+    }
 
     // MARK: Table View Data Source
 
@@ -49,7 +57,7 @@ class TrackTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        100
+        Self.days
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -58,7 +66,6 @@ class TrackTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-//        cell.textLabel?.text = "Page \(index + 1)\t\tRow \(indexPath.row)"
         if let dayRow = cell as? DayTableViewCell {
             dayRow.configure(with: "Page \(index + 1)\t\tRow \(indexPath.row)")
         }
@@ -102,6 +109,22 @@ class TrackTableViewController: UITableViewController {
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         scrollController.contentOffset = scrollView.contentOffset
         print(scrollView.contentOffset, "scrollViewDidEndDragging")
+    }
+    
+    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        // Scroll to bottom instead
+        print("scroll to top")
+//        scrollToBottom()
+//        UIScrollView.setAnimationCurve(.easeInOut)
+        
+//        UIViewPropertyAnimator(duration: 1, controlPoint1: .init(x: 0.25, y: 1), controlPoint2: .init(x: 0.25, y: 1)) {
+//            self.scrollToBottom()
+//        }.startAnimation()
+        
+//        UIView.animate(withDuration: 0.25) {
+//            self.scrollToBottom()
+//        }
+        return true
     }
 
 }

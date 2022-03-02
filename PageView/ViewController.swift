@@ -31,10 +31,14 @@ class ViewController: UIViewController {
         
         tableView.sectionHeaderTopPadding = 0
         
+        // Could also not deal with tableViewContainer at all and have
+        // a custom header view here that intentionally and distinctly
+        // covers the Tracks table view controller header.
+        
         // Hide the header when scrolling
         let maskLayer1 = CALayer()
         maskLayer1.backgroundColor = UIColor.black.cgColor
-        maskLayer1.frame = CGRect(x: 0, y: 44, width: tableView.frame.width, height: tableView.frame.height)
+        maskLayer1.frame = CGRect(x: 0, y: 44, width: tableView.frame.width, height: tableView.frame.height * 2)
         
         tableViewContainer.layer.mask = maskLayer1
         

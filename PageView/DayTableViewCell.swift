@@ -37,8 +37,9 @@ class DayTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(tempButton)
         
         NSLayoutConstraint.activate([
-            button.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -12),
-            tempButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -12)
+            // -12 matches the old SwiftUI Tickmate
+            button.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -10),
+            tempButton.heightAnchor.constraint(equalTo: stackView.heightAnchor, constant: -10)
         ])
     }
 
