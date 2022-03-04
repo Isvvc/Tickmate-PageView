@@ -46,7 +46,7 @@ class TrackTableViewController: UITableViewController {
     
     private func scrollToBottom(animated: Bool = false) {
         let indexPath = IndexPath(row: Self.days-1, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
         scrollController.contentOffset = tableView.contentOffset
         print(scrollController.contentOffset, "scrollToBottom")
     }
@@ -114,19 +114,10 @@ class TrackTableViewController: UITableViewController {
     }
     
     override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        // Scroll to bottom instead
         print("scroll to top")
-//        scrollToBottom()
-//        UIScrollView.setAnimationCurve(.easeInOut)
-        
-//        UIViewPropertyAnimator(duration: 1, controlPoint1: .init(x: 0.25, y: 1), controlPoint2: .init(x: 0.25, y: 1)) {
-//            self.scrollToBottom()
-//        }.startAnimation()
-        
-//        UIView.animate(withDuration: 0.25) {
-//            self.scrollToBottom()
-//        }
-        return true
+        // Scroll to bottom instead
+        scrollToBottom(animated: true)
+        return false
     }
 
 }
