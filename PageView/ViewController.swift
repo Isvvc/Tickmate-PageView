@@ -102,7 +102,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        100
+        TrackTableViewController.days
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -111,7 +111,15 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TestCell", for: indexPath)
-        cell.textLabel?.text = "Day \(indexPath.row)"
+        let day = TrackTableViewController.days - indexPath.row - 1
+        switch day {
+        case 0:
+            cell.textLabel?.text = "Today"
+        case 1:
+            cell.textLabel?.text = "Yesterday"
+        default:
+            cell.textLabel?.text = "Day \(day)"
+        }
         return cell
     }
 }
