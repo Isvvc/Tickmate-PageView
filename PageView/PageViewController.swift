@@ -9,9 +9,13 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
+    //MARK: Properties
+    
     var scrollPosition: CGPoint = .zero
     var scrollController: ScrollController = .shared
     private var page: Int = 0
+    
+    //MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,8 @@ class PageViewController: UIPageViewController {
             return false
         }
     }
+    
+    //MARK: Private
     
     private func trackVC(for index: Int) -> TrackTableViewController? {
         guard let trackVC = storyboard?.instantiateViewController(withIdentifier: "TrackTable") as? TrackTableViewController else { return nil }

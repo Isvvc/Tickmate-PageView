@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 class ViewController: UIViewController {
+    
+    //MARK: Properties
 
     @IBOutlet weak var tableViewContainer: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +20,8 @@ class ViewController: UIViewController {
     private var subscribers = Set<AnyCancellable>()
     private var drop: DispatchWorkItem?
     private var impact: DispatchWorkItem?
+    
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +74,8 @@ class ViewController: UIViewController {
         subscribers = [scrollSubscriber, pagingSubscriber]
     }
     
+    //MARK: Private
+    
     private func endPaging() {
         let drop = DispatchWorkItem { [weak self] in
             UIView.animate(withDuration: 0.25) {
@@ -87,6 +93,8 @@ class ViewController: UIViewController {
     }
 
 }
+
+//MARK: Table View Data Source
 
 extension ViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,6 +115,8 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
 }
+
+//MARK: Table View Delegate
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

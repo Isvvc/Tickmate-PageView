@@ -10,13 +10,19 @@ import Combine
 
 class TrackTableViewController: UITableViewController {
     
+    //MARK: Static
+    
     static let days = 100
+    
+    //MARK: Properties
     
     var index = 0
     var scrollController: ScrollController = .shared
     private var initialized = false
     
     private var pagingSubscriber: AnyCancellable?
+    
+    //MARK: Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +41,7 @@ class TrackTableViewController: UITableViewController {
                 //TODO: Test this on a square screen with no Safe Area
                 // Could even potentially add a bit more tolorance to this
                 // so it doesn't flash them when only scrolled up a bit.
+                //Note: If there's an added option to flip so today is at the top, make sure to adjust this
                 let position = self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom
                 if self.tableView.contentOffset.y < position {
                     self.tableView.showsVerticalScrollIndicator = true
@@ -50,6 +57,8 @@ class TrackTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         scrollToDelegate()
     }
+    
+    //MARK: Private
     
     private func scrollToDelegate() {
         guard !tableView.isDragging, !tableView.isDecelerating else { return }
