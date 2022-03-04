@@ -14,6 +14,7 @@ class TrackTableViewController: UITableViewController {
     
     var index = 0
     var scrollController: ScrollController = .shared
+    private var initialized = false
     
     private var pagingSubscriber: AnyCancellable?
 
@@ -39,6 +40,11 @@ class TrackTableViewController: UITableViewController {
     
     private func scrollToDelegate() {
         guard !tableView.isDragging, !tableView.isDecelerating else { return }
+        
+        guard scrollController.initialized else {
+            return scrollToBottom()
+        }
+        
         let scrollPosition = scrollController.contentOffset
         print(scrollPosition, "scrollToDelegate")
         self.tableView.contentOffset = scrollPosition
@@ -47,8 +53,10 @@ class TrackTableViewController: UITableViewController {
     private func scrollToBottom(animated: Bool = false) {
         let indexPath = IndexPath(row: Self.days-1, section: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
-        scrollController.contentOffset = tableView.contentOffset
-        print(scrollController.contentOffset, "scrollToBottom")
+        if initialized {
+            scrollController.contentOffset = tableView.contentOffset
+            print(scrollController.contentOffset, "scrollToBottom")
+        }
     }
 
     // MARK: Table View Data Source
@@ -106,6 +114,12 @@ class TrackTableViewController: UITableViewController {
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollController.contentOffset = scrollView.contentOffset
         print(scrollView.contentOffset, "scrollViewDidEndDecelerating")
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+        scrollController.initialized = true
+        initialized = true
     }
 
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
