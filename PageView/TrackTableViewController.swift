@@ -26,9 +26,22 @@ class TrackTableViewController: UITableViewController {
         scrollToDelegate()
         
         pagingSubscriber = scrollController.$isPaging.sink { [weak self] isPaging in
-            self?.tableView.showsVerticalScrollIndicator = !isPaging
-            if !isPaging {
-                self?.tableView.flashScrollIndicators()
+            guard let self = self else { return }
+            
+            if isPaging {
+                self.tableView.showsVerticalScrollIndicator = false
+            } else {
+                // We only want to flash the scroll bar if the table is scrolled above the bottom.
+                //TODO: Test this on a square screen with no Safe Area
+                // Could even potentially add a bit more tolorance to this
+                // so it doesn't flash them when only scrolled up a bit.
+                let position = self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom
+                if self.tableView.contentOffset.y < position {
+                    self.tableView.showsVerticalScrollIndicator = true
+                    self.tableView.flashScrollIndicators()
+                }
+                // If we set showsVerticalScrollIndicator to true here it'll show it, so leave it off
+                // until the user actually starts scrolling again (see scrollViewWillBeginDragging).
             }
         }
     }
@@ -113,11 +126,18 @@ class TrackTableViewController: UITableViewController {
 
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         scrollController.contentOffset = scrollView.contentOffset
-        print(scrollView.contentOffset, "scrollViewDidEndDecelerating")
+        print(scrollView.contentOffset,
+              "scrollViewDidEndDecelerating",
+              "contentSize.height - bounds.size.height + contentInset.bottom",
+              scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         print("scrollViewWillBeginDragging")
+        // Avoid uncessesary calls to setter as that seems to flash it
+        if !tableView.showsVerticalScrollIndicator {
+            tableView.showsVerticalScrollIndicator = true
+        }
         scrollController.initialized = true
         initialized = true
     }
