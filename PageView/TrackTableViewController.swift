@@ -44,10 +44,11 @@ class TrackTableViewController: UITableViewController {
         self.tableView.contentOffset = scrollPosition
     }
     
-    private func scrollToBottom() {
+    private func scrollToBottom(animated: Bool = false) {
         let indexPath = IndexPath(row: Self.days-1, section: 0)
-//        self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
-        self.tableView.contentOffset = .init(x: 0, y: self.tableView.contentSize.height - self.tableView.bounds.size.height + self.tableView.contentInset.bottom)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        scrollController.contentOffset = tableView.contentOffset
+        print(scrollController.contentOffset, "scrollToBottom")
     }
 
     // MARK: Table View Data Source
@@ -91,7 +92,8 @@ class TrackTableViewController: UITableViewController {
         // resetting the scroll position every time a new screen loads.
         // This guard prevents that. The end functions below allow it
         // to still sync position when it is 0.
-        guard scrollView.contentOffset != .zero else { return }
+        guard scrollView.contentOffset != .zero,
+              !scrollController.isPaging else { return }
         scrollController.contentOffset = scrollView.contentOffset
         print(scrollView.contentOffset, "scrollViewDidScroll")
     }
