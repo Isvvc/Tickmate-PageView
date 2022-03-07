@@ -119,30 +119,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DefaultCell" id="jwE-M7-Sy5" customClass="DayTableViewCell" customModule="PageView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jwE-M7-Sy5" id="CdF-3X-TAp">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yr0-hu-5um">
-                                            <rect key="frame" x="120" y="0.0" width="274" height="43.5"/>
-                                        </stackView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="yr0-hu-5um" firstAttribute="leading" secondItem="CdF-3X-TAp" secondAttribute="leading" constant="120" id="QkB-WZ-KHA"/>
-                                        <constraint firstAttribute="trailing" secondItem="yr0-hu-5um" secondAttribute="trailing" constant="20" id="cRA-qA-Qz0"/>
-                                        <constraint firstAttribute="bottom" secondItem="yr0-hu-5um" secondAttribute="bottom" id="vbX-wF-kyi"/>
-                                        <constraint firstItem="yr0-hu-5um" firstAttribute="top" secondItem="CdF-3X-TAp" secondAttribute="top" id="zJr-mF-OEw"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="stackView" destination="yr0-hu-5um" id="RuS-zp-wKD"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="S51-u7-CMQ" id="h6A-Om-LMw"/>
                             <outlet property="delegate" destination="S51-u7-CMQ" id="H5o-jP-kbs"/>
