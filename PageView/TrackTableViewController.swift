@@ -8,6 +8,25 @@
 import UIKit
 import Combine
 
+class Track: NSObject {
+    var name: String
+    var color: UIColor
+    
+    init(name: String, color: UIColor) {
+        self.name = name
+        self.color = color
+    }
+}
+
+class TrackController {
+    static var shared = TrackController()
+    
+    var tracks: [Track] = [
+        Track(name: "Brush teeth", color: .systemBlue),
+        Track(name: "Read", color: .systemYellow)
+    ]
+}
+
 class TrackTableViewController: UITableViewController {
     
     //MARK: Static
@@ -27,6 +46,7 @@ class TrackTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(DayTableViewCell.self, forCellReuseIdentifier: "DayCell")
         tableView.delegate = self
         tableView.sectionHeaderTopPadding = 0
         scrollToDelegate()
@@ -96,9 +116,9 @@ class TrackTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DayCell", for: indexPath)
         if let dayRow = cell as? DayTableViewCell {
-            dayRow.configure(with: "Page \(index + 1)\t\tRow \(indexPath.row)")
+            dayRow.configure(with: TrackController.shared.tracks)
         }
 
         scrollToDelegate()
